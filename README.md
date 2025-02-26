@@ -1,4 +1,4 @@
-### Programmänderungen und Verbesserungen
+# Programmänderungen und Verbesserungen
 
 ## Überblick
 Dieses Programm wurde aktualisiert, um alle bekannten Bugs zu beheben und Unterstützung für den **AHT10-Sensor** hinzuzufügen. Der Sensor kann nun problemlos in das bestehende System integriert werden, um Temperatur- und Feuchtigkeitsdaten zu erfassen.
