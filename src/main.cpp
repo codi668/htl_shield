@@ -23,9 +23,12 @@
 #define STATE_4        4    // adc
 #define STATE_5        5    // mfc^
 #define STATE_6        6    // peakhold
-#define STATE_7        7    // aht10
+#define STATE_7        7    // aht
 
 char text[TXT_LENGTH];
+char tempStr[10];  // Puffer für die Temperatur als String
+char humStr[10];   // Puffer für die Luftfeuchtigkeit als String
+
 
 void showStartMessage(void);
 
@@ -72,7 +75,7 @@ void loop()
                 sprintf(text, "Poti:");
                 oledPrintfxy(0, 0, text);
                 oledRefresh();
-                setMulticolorLed(0, 10, 0);
+                setMulticolorLed(0, 10, 10);
             }
         
         break; 
@@ -264,13 +267,13 @@ void loop()
             
             Wire.beginTransmission(PCF8574);
             Wire.write(~getPeakLeds()); 
-            
+
             if (keyPressed(KEY_1))
             {
                 state = STATE_7;
                 clearKey(KEY_1); 
                 clearKey(KEY_2); 
-                setMulticolorLed(0, 20, 30);
+                setMulticolorLed(40, 0, 0);
             }
         
             if (keyPressed(KEY_2))
@@ -283,22 +286,20 @@ void loop()
                 showStartMessage();
                 setMulticolorLed(40, 0, 0);
             }
-            
         
 
 
         break;
 
-        case STATE_7 : // aht10
+        case STATE_7:  // aht
 
-            float temperature, humidity;
-            getAHT(&temperature, &humidity);
+            getAHT(tempStr, humStr);
 
             oledClrDisplay();
-            sprintf(text, "Temp: 33,2 "); oledPrintfxy(0, 0, text);
-            sprintf(text, "Hum:  50%"); oledPrintfxy(0, 20, text);
+            //oledPrintfxy(0,  0, tempStr);
+            //oledPrintfxy(0, 20, humStr);
             oledRefresh();
-            setMulticolorLed(40, 20, 20);
+            setMulticolorLed(40, 0, 0);
 
             if (keyPressed(KEY_1))
             {
@@ -306,8 +307,8 @@ void loop()
                 clearKey(KEY_1); 
                 clearKey(KEY_2); 
                 setMulticolorLed(40, 0, 0);
+                showStartMessage();
             }
-
             if (keyPressed(KEY_2))
             {
                 Serial.println("key 2 pressed!");
@@ -318,6 +319,7 @@ void loop()
                 showStartMessage();
                 setMulticolorLed(40, 0, 0);
             }
+        break;
 
 
     }

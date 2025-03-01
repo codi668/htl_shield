@@ -36,6 +36,10 @@ int getPotiLin(void)
     else              x = 0x0;
 
     return x;
+
+    // Winkelberechnung mit kalibrierten Werten
+
+  
 }
 
 
