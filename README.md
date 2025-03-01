@@ -19,8 +19,9 @@ Dieses Programm wurde aktualisiert, um alle bekannten Bugs zu beheben und Unters
      ```
 
 2. **Verbindung**: 
-   - Schließen Sie den **AHT10-Sensor** über den I2C-Bus an das Gerät an.
+   - Schließen Sie den **AHT10-Sensor** über den I2C-Bus an das HTL-shield an.
    - Stellen Sie sicher, dass die richtigen I2C-Adressen und Verbindungen verwendet werden.
+   - Der Sensor muss um 180° gedreht sein im vergleich zum gyro.
 
 3. **Starten des Programms**: 
    - Führen Sie das Programm wie gewohnt aus. Der **AHT10-Sensor** wird automatisch erkannt und liefert regelmäßig Temperatur- und Feuchtigkeitsdaten.
