@@ -35,6 +35,11 @@ void oledPrintfxy(int x, int y, char * t)
     oled.setCursor(x, y);
     oled.print(t);
 }
+void oledPrintf_temp_and_hum(char * temp, char * hum)
+{
+    oledPrintfxy(0, 0, temp);
+    oledPrintfxy(0, 20, hum);
+}
 
 void oledRefresh(void)
 { 

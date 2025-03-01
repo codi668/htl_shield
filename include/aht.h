@@ -2,7 +2,7 @@
 #define AHT_H
 
 void initAHT(void);
-int getAHT(char *temperature, char *humidity);
+int getAHT(float *temperature, float *humidity);
 bool checkAHTConnection(void);
 void floatToString(float value, char* buffer, int precision);
 

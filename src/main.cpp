@@ -26,8 +26,7 @@
 #define STATE_7        7    // aht
 
 char text[TXT_LENGTH];
-char tempStr[10];  // Puffer für die Temperatur als String
-char humStr[10];   // Puffer für die Luftfeuchtigkeit als String
+
 
 
 void showStartMessage(void);
@@ -53,6 +52,7 @@ void loop()
     static int state = STATE_0;
     static int led = FALSE; 
     int x, y, z;
+    float temp, hum;
 
     if (keyPressed(DIAL_KEY))    // für alle states: reset dialControl
     {
@@ -292,15 +292,21 @@ void loop()
         break;
 
         case STATE_7:  // aht
-
-            getAHT(tempStr, humStr);
+            int temp_last_digits = 0;
+            int hum_last_digits = 0;
+            getAHT(&temp,&hum);
+            temp = temp;
+            hum = hum ;
+            temp_last_digits = (int)(temp * 100) % 100;
+            hum_last_digits = (int)(hum * 100) % 100;
 
             oledClrDisplay();
-            //oledPrintfxy(0,  0, tempStr);
-            //oledPrintfxy(0, 20, humStr);
+            sprintf(text, "temp:%d,%d", (int)temp, temp_last_digits);
+            oledPrintfxy(0,  0, text);
+            sprintf(text, "hum: %d,%d", (int)hum, hum_last_digits);
+            oledPrintfxy(0, 20, text);
             oledRefresh();
-            setMulticolorLed(40, 0, 0);
-
+            setMulticolorLed(40, 20, 0);
             if (keyPressed(KEY_1))
             {
                 state = STATE_0;

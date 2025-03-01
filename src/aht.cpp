@@ -12,7 +12,7 @@
 
 void initAHT(void)
 {
-    AHT10 aht; //AHT10 sensor
+    AHT10 aht; // AHT10 sensor
     if (!aht.begin())
     {
         Serial.println("Could not find AHTX0 sensor!");
@@ -20,18 +20,14 @@ void initAHT(void)
             ;
     }
 }
-int getAHT(char *tempStr, char *humStr)
+int getAHT(float *temperature, float *humidity)
 {
-    float temperature, humidity;
     AHT10 aht;
-    temperature = aht.readTemperature();
-    
-    humidity = aht.readHumidity();
-    sprintf(tempStr, "Temp: %2.2f", temperature);
-    sprintf(humStr, "Hum: %2.2f", humidity);
-
+    *temperature = aht.readTemperature();
+    *humidity = aht.readHumidity();
 }
-void floatToString(float value, char* buffer, int precision) {
+void floatToString(float value, char *buffer, int precision)
+{
     int integerPart = (int)value;
     float fractionalPart = value - integerPart;
     int fractionalInt = (int)(fractionalPart * pow(10, precision));
